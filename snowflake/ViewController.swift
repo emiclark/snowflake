@@ -45,7 +45,6 @@ class ViewController: UIViewController {
             self.bgImage.alpha = 1.0
         }) { (true) in
             self.showHappyNewYear()
-            self.showSnowflake1()
         }
     }
     
@@ -60,30 +59,32 @@ class ViewController: UIViewController {
     func showYear() {
         UIView.animate(withDuration: 1.0, animations: {
             self.Label2018.alpha = 1.0
+            self.showSnowflake1()
         })
     }
     
+    // fix: flake1 and flake 2 not showing unless stepping through code
     func showSnowflake1() {
-        UIView.animate(withDuration: 3.0, animations: {
-            self.emitter1 = Emitter.get(with: (UIImage(named: "snowflake1.png"))!, scale: 70, velocity: 1)
+        UIView.animate(withDuration: 5.0, animations: {
+            self.emitter1 = Emitter.get(with: (UIImage(named: "snowflake1.png"))!, scale: 90, velocity: 1)
             self.emitter1?.emitterPosition = CGPoint(x: self.view.frame.width/2, y: -10)
             self.emitter1?.emitterSize = CGSize(width: self.view.frame.width, height: 1)
             self.self.view.layer.addSublayer(self.emitter1!)
             self.emitter1?.opacity = 1.0
-//            self.emitter1?.scale = 0.25
+            self.emitter1?.scale = 18
         }, completion: { (true) in
             self.showSnowflake2()
         })
     }
 
     func showSnowflake2() {
-        UIView.animate(withDuration: 3.0, animations: {
+        UIView.animate(withDuration: 5.0, delay:10.0, animations: {
             self.emitter2 = Emitter.get(with: (UIImage(named: "snowflake2.png"))!, scale: 90, velocity: 1)
             self.emitter2?.emitterPosition = CGPoint(x: self.view.frame.width/2, y: -10)
             self.emitter2?.emitterSize = CGSize(width: self.view.frame.width, height: 1)
             self.self.view.layer.addSublayer(self.emitter2!)
             self.emitter2?.opacity = 1.0
-//            self.emitter2?.scale = 25
+            self.emitter2?.scale = 25
             
         }, completion: { (true) in
             // fade out snowFlake1
